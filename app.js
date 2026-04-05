@@ -23,7 +23,9 @@ app.use(
 app.use(cookieParser());
 
 import authRouter from "./routes/auth.routes.js"
+import transactionRoute from "./routes/transactions.route.js"
 
 app.use("/auth",authRouter)
+app.use("/transaction",transactionRoute)
 
 export default app

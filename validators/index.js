@@ -1,5 +1,5 @@
 import { application } from "express";
-import {body} from "express-validator";
+import {body, query} from "express-validator";
 
 const userRegisterValidator = () =>{
     return [
@@ -47,10 +47,80 @@ const adminEmailValidator = () => {
   ]
 }
 
+const transactionValidator = () =>{
+  return [
+    body('amount')
+    .isFloat({ gt: 0 })
+    .withMessage('Amount must be a positive number'),
+    body('type')
+    .isIn(['income', 'expense'])
+    .withMessage('Type must be either income or expense'),
+    body('category')
+    .trim()
+    .notEmpty()
+    .withMessage('Category is required')
+    .isIn(['food', 'entertainment','health','travel','clothing','salary','retal_income','business','other'])
+    .withMessage('Category must be either (food, entertainment,health,travel,clothing,salary,retal_income,business,other)'),
+    body('note')
+    .optional()
+    .isLength({ max: 200 })
+    .withMessage('Note cannot exceed 200 characters'),
+  ]
+}
+
+const viewTransactionValidtor = () => {
+  return [
+    query("type")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Transaction Type cannot be empty")
+    .isIn(['income','expense']),
+
+     query('category')
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage('Category is required')
+    .isIn(['food', 'entertainment','health','travel','clothing','salary','retal_income','business','other'])
+    .withMessage('Category must be either (food, entertainment,health,travel,clothing,salary,retal_income,business,other)'),
+
+ query("from")
+  .optional()
+  .isISO8601()
+  .withMessage("From must be a valid date"),
+
+query("to")
+  .optional()
+  .isISO8601()
+  .withMessage("To must be a valid date")
+  .custom((toDate, { req }) => {
+    const fromDate = req.query.from;
+
+    // If 'from' is missing, we can't compare, so we let it pass
+    if (!fromDate) return true;
+
+    // Return false if 'to' is earlier than 'from'
+    // This triggers the .withMessage() below
+    return new Date(toDate) >= new Date(fromDate);
+  })
+  .withMessage("To date cannot be earlier than From date"),
+
+  query("userId")
+  .optional()
+  .trim()
+  .notEmpty()
+  .withMessage("user id not be empty")
+
+  ]
+}
+
 
 
 export  {
     userLoginValidator,
     userRegisterValidator,
-    adminEmailValidator
+    adminEmailValidator,
+    transactionValidator,
+    viewTransactionValidtor
 }

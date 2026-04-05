@@ -19,7 +19,7 @@ export const verifyJWT = asyncHandler(async (req,res,next)=>{
             message : "Invalid Access token",
         })
     }
-        req.user = user;
+        req.user = { user , role : decodedToken?.role};
         next();
         
     }catch(error){

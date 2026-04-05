@@ -76,10 +76,21 @@ const login = asyncHandler(async (req,res)=>{
         })
     }
 
+    
+
+const [result] = await pool.query("SELECT * FROM access_roles WHERE id=?",[user.role_id])
+    
+    if(result.length == 0){
+      return res.status(404).json({
+        "message"  : "Role not found"
+      })
+    }
+    const assignedRole = result[0].role
+
         const accessToken = jwt.sign(
     {
         id: user.id,
-        role: user.role,
+        role: assignedRole,
     },
     process.env.JWT_ACCESS_SECRET,
     { expiresIn: "15m" } 
@@ -116,6 +127,9 @@ const login = asyncHandler(async (req,res)=>{
     message: "Login successful",
     id: user.id,
     email: user.email,
+    name : user.name,
+    role : assignedRole,
+    is_active : user.is_active
   });
 
 })
