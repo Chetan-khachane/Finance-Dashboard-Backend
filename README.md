@@ -1,4 +1,58 @@
-# Zorvyn API - Documentation
+# Finance Dashboard Backend - Zorvyn
+
+> Managing daily financial needs with enterprise product focus
+---
+
+##  Contents
+- [Technologies Used](#technologies-used)
+- [Setup](#setuping)
+- [API Documentation](#api-documentation)
+
+
+---
+
+## 🛠️ Technologies Used
+- Backend: Node.js / Express.JS
+- Database: MySQL  
+- Authentication: JWT
+- Testing: Postman / Railway(MySQL Database Deloployment)
+
+---
+
+## ⚙️ Setup
+
+### 1. Clone the repository
+```bash
+https://github.com/Chetan-khachane/Zorvyn-Backend-Intern-Assessment.git
+```
+### 2. Open MySQL Workbench
+- Click on create new connection
+
+### 3. Create .env in the project root folder
+- Use MySQL connection parameters and paste into .env
+- Use the below .env exactly
+```bash
+DB_HOST=<Hostname>
+DB_USER=<Username>
+DB_PASSWORD=<Password>
+DB_NAME=finance
+DB_PORT=<Port>
+JWT_ACCESS_SECRET=
+JWT_REFRESH_SECRET=
+PORT=8000
+```
+
+### 4. Initialise Database tables
+- In ```/db/init.sql``` run ```init.sql``` in mysql workbench to generate tables
+
+### 5. Install packages
+- run ```npm install```
+
+### 6. Run application
+- run in command line ```node index.js```
+
+
+## ⚙️ API Documentation
 
 ## Overview
 This is a complete Postman API collection for the **Zorvyn** financial management system. The collection includes all endpoints for authentication, transactions management, dashboard analytics, and system-wide analytics.
