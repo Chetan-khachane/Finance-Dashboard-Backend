@@ -128,9 +128,9 @@ To set these:
 |--------|----------|------|-------------|
 | POST | `/transaction` | CUSTOMER | Create a new transaction |
 | GET | `/transaction` | CUSTOMER, ADMIN, ANALYST | Get all transactions with filters |
-| GET | `/transaction/:id` | CUSTOMER, ADMIN, ANALYST | Get specific transaction | //check
-| PUT | `/transaction/:id` | CUSTOMER, ADMIN | Update transaction | //check
-| DELETE | `/transaction/:id` | CUSTOMER, ADMIN | Delete transaction | //check
+| GET | `/transaction/:id` | CUSTOMER, ADMIN, ANALYST | Get specific transaction | 
+| PUT | `/transaction/:id` | CUSTOMER, ADMIN | Update transaction | 
+| DELETE | `/transaction/:id` | CUSTOMER, ADMIN | Delete transaction | 
 
 #### Query Parameters (GET all transactions)
 - `type`: INCOME or EXPENSE
@@ -198,7 +198,7 @@ To set these:
 
 ---
 
-//check
+
 ## Error Responses
 
 ### 401 Unauthorized
